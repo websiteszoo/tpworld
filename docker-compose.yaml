@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  wordpress:
+    image: wordpress:6.4.2
+    ports:
+      - "80:80"
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: tpworld 
+      WORDPRESS_DB_PASSWORD: zIu6gfECT<$<cXkE
+      WORDPRESS_DB_NAME: tpworld 
+    volumes:
+      - ./code:/var/www/html
+      - ./php.ini:/usr/local/etc/php/conf.d/php.ini
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: zIu6gfECT<$<cXkE
+      MYSQL_DATABASE: tpworld  
+      MYSQL_USER: tpworld  
+      MYSQL_PASSWORD: zIu6gfECT<$<cXkE
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.1-apache
+    links:
+      - mysql
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: tpworld  
+      PMA_PASSWORD: zIu6gfECT<$<cXkE
